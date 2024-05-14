@@ -59,13 +59,13 @@
         async function initQuotes() {
             await fetchQuotes();
             displayQuote();
-            intervalId = setInterval(displayQuote, 60000); // Cambia cada 1 minuto
+            intervalId = setInterval(displayQuote, 120000); // Cambia cada 1 minuto
         }
 
         document.getElementById('changeQuoteButton').addEventListener('click', () => {
             clearInterval(intervalId); // Limpiar el intervalo para evitar superposiciones
             displayQuote();
-            intervalId = setInterval(displayQuote, 60000); // Reiniciar el intervalo
+            intervalId = setInterval(displayQuote, 120000); // Reiniciar el intervalo
         });
 
         // Initialize the quotes on page load
