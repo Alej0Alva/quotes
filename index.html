@@ -38,7 +38,7 @@
         function displayQuote(quotes) {
             const quoteText = document.getElementById('quoteText');
             const randomIndex = Math.floor(Math.random() * quotes.length);
-            quoteText.textContent = quotes[randomIndex];
+            quoteText.textContent = quotes[randomIndex].filtro;
         }
 
         async function initQuotes() {
@@ -52,3 +52,4 @@
     </script>
 </body>
 </html>
+
