@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget de Citas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .quote-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" id="quoteContainer">
+        <p id="quoteText"></p>
+    </div>
+
+    <script>
+        async function fetchQuotes() {
+            const response = await fetch('quotes.json');
+            const quotes = await response.json();
+            return quotes;
+        }
+
+        function displayQuote(quotes) {
+            const quoteText = document.getElementById('quoteText');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteText.textContent = quotes[randomIndex];
+        }
+
+        async function initQuotes() {
+            const quotes = await fetchQuotes();
+            displayQuote(quotes);
+            setInterval(() => displayQuote(quotes), 5000);
+        }
+
+        // Initialize the quotes on page load
+        initQuotes();
+    </script>
+</body>
+</html>
