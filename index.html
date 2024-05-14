@@ -12,8 +12,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
-            overflow: hidden; /* Ocultar barra de desplazamiento */
+            background: url('jameswebb.jpg') no-repeat center center fixed; /* Cambia URL_DE_TU_IMAGEN por la URL de tu imagen */
+            background-size: cover;
             margin: 0; /* Eliminar márgenes para evitar barras de desplazamiento innecesarias */
         }
         .quote-container {
@@ -59,13 +59,13 @@
         async function initQuotes() {
             await fetchQuotes();
             displayQuote();
-            intervalId = setInterval(displayQuote, 30000); // Cambia cada 30 segundos
+            intervalId = setInterval(displayQuote, 60000); // Cambia cada 1 minuto
         }
 
         document.getElementById('changeQuoteButton').addEventListener('click', () => {
             clearInterval(intervalId); // Limpiar el intervalo para evitar superposiciones
             displayQuote();
-            intervalId = setInterval(displayQuote, 30000); // Reiniciar el intervalo
+            intervalId = setInterval(displayQuote, 60000); // Reiniciar el intervalo
         });
 
         // Initialize the quotes on page load
