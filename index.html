@@ -8,6 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -20,6 +21,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             text-align: center;
+            margin-bottom: 10px;
+        }
+        .change-quote-button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -27,29 +37,39 @@
     <div class="quote-container" id="quoteContainer">
         <p id="quoteText"></p>
     </div>
+    <button class="change-quote-button" id="changeQuoteButton">Cambiar Cita</button>
 
     <script>
+        let quotes = [];
+        let intervalId;
+
         async function fetchQuotes() {
             const response = await fetch('quotes.json');
-            const quotes = await response.json();
-            return quotes;
+            quotes = await response.json();
         }
 
-        function displayQuote(quotes) {
+        function displayQuote() {
             const quoteText = document.getElementById('quoteText');
             const randomIndex = Math.floor(Math.random() * quotes.length);
             quoteText.textContent = quotes[randomIndex].filtro;
         }
 
         async function initQuotes() {
-            const quotes = await fetchQuotes();
-            displayQuote(quotes);
-            setInterval(() => displayQuote(quotes), 5000);
+            await fetchQuotes();
+            displayQuote();
+            intervalId = setInterval(displayQuote, 30000); // Cambia cada 30 segundos
         }
+
+        document.getElementById('changeQuoteButton').addEventListener('click', () => {
+            clearInterval(intervalId); // Limpiar el intervalo para evitar superposiciones
+            displayQuote();
+            intervalId = setInterval(displayQuote, 30000); // Reiniciar el intervalo
+        });
 
         // Initialize the quotes on page load
         initQuotes();
     </script>
 </body>
 </html>
+
 
