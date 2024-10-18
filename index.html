@@ -11,9 +11,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: black; /* Cambiar fondo a color negro */
-            margin: 0; /* Eliminar márgenes para evitar barras de desplazamiento innecesarias */
+            min-height: 100vh;
+            background-color: black;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .quote-container {
             background: white;
@@ -21,15 +23,20 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
+            width: 100%;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .change-quote-button {
-            background-color: black;
+            background-color: rgb(255, 0, 0);
             border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            border-radius: 10%;
             cursor: pointer;
         }
     </style>
@@ -41,41 +48,47 @@
     <button class="change-quote-button" id="changeQuoteButton"></button>
 
     <script>
-        // Declarar arreglo para almacenar las citas
         let quotes = [];
-        // Variable para almacenar el ID del intervalo
+        let shuffledQuotes = [];
+        let currentIndex = 0;
         let intervalId;
 
-        // Función asíncrona para obtener las citas desde un archivo JSON
         async function fetchQuotes() {
             const response = await fetch('quotes.json');
             quotes = await response.json();
+            shuffleQuotes();
         }
 
-        // Función para mostrar una cita aleatoria en el contenedor
+        function shuffleQuotes() {
+            shuffledQuotes = [...quotes];
+            for (let i = shuffledQuotes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledQuotes[i], shuffledQuotes[j]] = [shuffledQuotes[j], shuffledQuotes[i]];
+            }
+            currentIndex = 0;
+        }
+
         function displayQuote() {
             const quoteText = document.getElementById('quoteText');
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            quoteText.textContent = quotes[randomIndex].filtro;
+            quoteText.textContent = shuffledQuotes[currentIndex].filtro;
+            currentIndex++;
+            if (currentIndex >= shuffledQuotes.length) {
+                shuffleQuotes();
+            }
         }
 
-        // Función inicializadora para obtener y mostrar las citas
         async function initQuotes() {
             await fetchQuotes();
             displayQuote();
-            // Establecer intervalo para cambiar la cita cada 190000 ms (aproximadamente 3.16 minutos)
-            intervalId = setInterval(displayQuote, 190000); // Cambia cada 1 minuto
+            intervalId = setInterval(displayQuote, 190000);
         }
 
-        // Agregar evento al botón para cambiar la cita al hacer clic
         document.getElementById('changeQuoteButton').addEventListener('click', () => {
-            clearInterval(intervalId); // Limpiar el intervalo para evitar superposiciones
+            clearInterval(intervalId);
             displayQuote();
-            // Reiniciar el intervalo
-            intervalId = setInterval(displayQuote, 190000); // Reiniciar el intervalo
+            intervalId = setInterval(displayQuote, 190000);
         });
 
-        // Inicializar las citas al cargar la página
         initQuotes();
     </script>
 </body>
