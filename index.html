@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Sentence Visualizer</h1>
+            <div class="counter-settings">
+                <div class="counter" id="counter">Sentences: 0</div>
+                <button id="settings-toggle" class="settings-btn" title="Show/Hide Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="separator"></div>
+        
+        <!-- Sección de configuraciones (oculta por defecto) -->
+        <div id="settings-panel" class="settings-panel hidden">
+            <div class="panel-section">
+                <div class="filter-container">
+                    <input type="text" id="filter-input" placeholder="Filter sentences...">
+                    <button id="filter-btn" class="btn">Search</button>
+                    <button id="show-all-btn" class="btn">Show All</button>
+                    <button id="favorites-btn" class="btn">Show Favorites</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="display-container">
+            <div id="sentence-display">
+                No sentences available.
+            </div>
+            <button id="favorite-btn" class="btn favorite-btn"><i class="fas fa-star"></i></button>
+        </div>
+
+        <div id="list-container" class="list-container hidden">
+            <div class="list-header">
+                <span>All Sentences</span>
+                <button id="close-list-btn" class="btn">Close</button>
+            </div>
+            <ul id="sentences-list"></ul>
+        </div>
+        
+        <div class="navigation-container">
+            <div class="nav-buttons">
+                <button id="prev-btn" class="btn">Previous</button>
+                <button id="random-btn" class="btn">Random</button>
+                <button id="reset-btn" class="btn">Reset</button>
+                <button id="next-btn" class="btn">Next</button>
+            </div>
+            
+            <!-- Botones de edición (ocultos por defecto) -->
+            <div class="edit-buttons" id="edit-buttons-panel">
+                <button id="edit-btn" class="btn">Edit</button>
+                <button id="delete-btn" class="btn">Delete</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div id="date-time"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
