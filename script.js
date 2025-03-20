@@ -47,7 +47,7 @@ function startAutoChangeTimer() {
     // Establecer un nuevo temporizador que se ejecute cada 30 segundos
     autoChangeTimer = setInterval(() => {
         randomSentence(); // Llamar a la función de selección aleatoria
-    }, 30000); // 30000 ms = 30 segundos
+    }, 60000); // 60000 ms = 60 segundos
 }
 
 // Cargar el archivo de base de datos predeterminado
