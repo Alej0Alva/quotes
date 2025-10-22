@@ -4,8 +4,8 @@ let currentIndex = -1;
 let viewedIndices = new Set();
 let autoChangeTimer = null;
 
-// Ruta del archivo TXT predeterminado
-const DEFAULT_JSON_PATH = 'quotes txt 221025_1213.txt';
+// Ruta del archivo TXT predeterminado (¡AQUÍ ESTÁ EL CAMBIO!)
+const DEFAULT_TXT_PATH = 'quotes.txt';
 
 // Elementos del DOM
 const counter = document.getElementById('counter');
@@ -42,7 +42,7 @@ function startAutoChangeTimer() {
 
 // Cargar el archivo de base de datos predeterminado
 function loadDefaultDatabase() {
-    fetch(DEFAULT_JSON_PATH)
+    fetch(DEFAULT_TXT_PATH) // Usamos la variable actualizada
         .then(response => {
             if (!response.ok) {
                 throw new Error('No se pudo cargar el archivo de sentencias predeterminado');
