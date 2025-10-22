@@ -86,6 +86,19 @@ h1 {
     width: 100%;
 }
 
+/* Estilos para el display de 3 frases */
+#sentence-display p {
+    margin: 0; /* Resetea margen por defecto */
+}
+
+.multi-quote-separator {
+    margin: 15px 0;
+    color: #adb5bd; /* Un color suave para el separador */
+    font-size: 20px;
+    line-height: 1;
+}
+
+
 /* Navegación */
 .navigation-container {
     display: flex;
